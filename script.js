@@ -3,11 +3,23 @@ const topRight = document.querySelector(".top-right-panel");
 const bottomLeft = document.querySelector(".bottom-left-panel");
 const bottomRight = document.querySelector(".bottom-right-panel");
 
-const sequence = [
+
+
+const getRandomPanel = () => {
+    const panels = [
     topLeft,
-    bottomRight,
-    bottomLeft,
     topRight,
+    bottomLeft,
+    bottomRight
+]
+return panels[parseInt(Math.random() * panels.length)];
+}
+
+const sequence = [
+    getRandomPanel(),
+    getRandomPanel(),
+    getRandomPanel(),
+    getRandomPanel()
 ]
 
 const flash = panel => {
@@ -16,7 +28,10 @@ const flash = panel => {
         setTimeout( () => {
             panel.className = panel.className.replace(
                 " active", "");
-                resolve();
+                setTimeout(() => {
+                    resolve();
+                }, 250);
+                
             }, 1000);
         }
             );
